@@ -46,7 +46,7 @@ public class LocalSeleniumGridExecution {
 		
 		prop.load(input);
 		
-		String pageURL = prop.getProperty(url);
+		String pageURL = prop.getProperty("url");
 		
 		System.out.println("The url from the prop file" +url);
 		
