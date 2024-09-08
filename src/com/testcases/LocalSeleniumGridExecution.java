@@ -1,6 +1,9 @@
 package com.testcases;
-import java.net.MalformedURLException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,7 +16,7 @@ public class LocalSeleniumGridExecution {
 	
 	@Test
 	
-	public void OpenBrowser() throws MalformedURLException, InterruptedException
+	public void OpenBrowser() throws InterruptedException, IOException
 	{
 		WebDriverManager.chromedriver().setup();
 		
@@ -37,7 +40,17 @@ public class LocalSeleniumGridExecution {
 		
 		driver = new RemoteWebDriver(new URL(url),options);
 		
-		driver.get("https://www.amazon.in/");
+		Properties prop = new Properties();
+		
+		InputStream input = new FileInputStream("./Input/TestData.properties");
+		
+		prop.load(input);
+		
+		String pageURL = prop.getProperty(url);
+		
+		System.out.println("The url from the prop file" +url);
+		
+		driver.get(pageURL);
 		
 		driver.manage().window().maximize();
 		
